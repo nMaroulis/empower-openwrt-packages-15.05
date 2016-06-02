@@ -114,6 +114,7 @@ start() {
     config_get MASTER_PORT general master_port "4433"
     config_get INTERFACE general interface "empower0"
     config_get NETWORK general network "wan"
+    config_get LOG general log "/dev/null"
     config_get_bool DEBUG general debug false
 
     config_list_foreach general debugfs append_debugfs
@@ -140,7 +141,7 @@ start() {
     /usr/bin/click-align /tmp/empower.click > /tmp/empower.aligned.click
 
     # run click
-    (/usr/bin/click /tmp/empower.aligned.click > /dev/null 2>&1 &)&
+    (/usr/bin/click /tmp/empower.aligned.click > $LOG 2>&1 &)&
 
     # give click some time to settle down
     sleep 2
