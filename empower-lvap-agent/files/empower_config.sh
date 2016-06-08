@@ -157,9 +157,6 @@ echo """FromHost($VIRTUAL_IFNAME)
   -> switch_data;
 
 ctrl :: Socket(TCP, $MASTER_IP, $MASTER_PORT, CLIENT true, VERBOSE true, RECONNECT_CALL el.reconnect)
-    -> downlink :: Counter()
-
-
     -> el :: EmpowerLVAPManager(EMPOWER_IFACE $VIRTUAL_IFNAME,
                                 WTP $WTP,
                                 EBS ebs,
@@ -172,10 +169,7 @@ ctrl :: Socket(TCP, $MASTER_IP, $MASTER_PORT, CLIENT true, VERBOSE true, RECONNE
                                 PERIOD 5000,
                                 DEBUGFS \"$DEBUGFS\",
                                 ERS ers,
-                                UPLINK uplink,
-                                DOWNLINK downlink,
                                 DEBUG $DEBUG)
-    -> uplink :: Counter()
     -> ctrl;
 
   wifi_cl [0]
