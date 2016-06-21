@@ -8,9 +8,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=empower-lvap-agent
-PKG_VERSION:=20160620
+PKG_VERSION:=20160621
 PKG_RELEASE:=1
-PKG_REV:=99cc679341603b0cea36840f00d9800d87b8802b
+PKG_REV:=24ce592426bf13bd2e3250437d5564047607353c
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/5g-empower/empower-lvap-agent.git
