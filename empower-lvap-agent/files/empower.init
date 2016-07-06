@@ -88,13 +88,18 @@ append_ifname() {
         return 0
     }
 
+    sleep 2
+
     # set monitor interface MTU
+    logger -t "$NAME" "Setting $IFNAME MTU to 2300."
     ifconfig $IFNAME mtu 2300
 
     # set monitor channel
+    logger -t "$NAME" "Setting $IFNAME channel to $CHANNEL."
     iw dev $IFNAME set channel $CHANNEL
 
     # bring monitor interface up
+    logger -t "$NAME" "Bringing $IFNAME up."
     ifconfig $IFNAME up
 
     IFNAMES="$IFNAMES $IFNAME"
