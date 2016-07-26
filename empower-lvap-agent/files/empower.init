@@ -116,6 +116,14 @@ append_debugfs() {
 
 start() {
 
+    # one more hack, sometimes on APUs the eth0 is not ready when the network
+    # is booting, this seems to happen only with the OVS bridge. restart the
+    # network completelly
+    /etc/init.d/network restart
+
+    # give the network a little time to settle
+    sleep 10
+
     # load config parameters
     config_load empower
     config_get MASTER_IP general master_ip
@@ -168,14 +176,6 @@ start() {
     ifconfig $INTERFACE up
 
     # give the interface some time to come up
-    sleep 2
-
-    # one more hack, sometimes on APUs the eth0 is not ready when the network
-    # is booting, this seems to happen onyl with the OVS bridge. restart the
-    # network completelly
-    /etc/init.d/network restart
-
-    # give the network a little time to settle
     sleep 2
 
     # add virtual ap interface to bridge

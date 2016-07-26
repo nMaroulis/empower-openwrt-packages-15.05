@@ -8,7 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=empower-lvap-agent
-PKG_VERSION:=20160724
+PKG_VERSION:=20160726
 PKG_RELEASE:=1
 PKG_REV:=a690f5fab691527ff7dae3036c2726d7aca9ba19
 
