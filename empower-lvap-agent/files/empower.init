@@ -90,6 +90,13 @@ append_ifname() {
         return 0
     }
 
+    DFS=$(find /sys/kernel/debug/ieee80211/ | grep "$IFNAME$")/../ath9k/bssid_extra
+
+    [ -f $DEBUGFS ] || {
+        logger -t "$NAME" "Debugfs not found $DEBUGFS. Ignoring."
+        return 0
+    }
+
     # this is needed because sometimes the monitor interface is not immediatelly 
     # ready to accept configuration commands
     sleep 2
@@ -107,11 +114,7 @@ append_ifname() {
     ifconfig $IFNAME up
 
     IFNAMES="$IFNAMES $IFNAME"
-}
-
-append_debugfs() {
-    logger -t "$NAME" "Checking debugfs $1."
-    DEBUGFS="$DEBUGFS $1"
+    DEBUGFS="$DEBUGFS $DFS"
 }
 
 start() {
@@ -133,7 +136,6 @@ start() {
     config_get LOG general log "/dev/null"
     config_get_bool DEBUG general debug false
 
-    config_list_foreach general debugfs append_debugfs
     config_list_foreach general ifname append_ifname
 
     # fetch network parameters
