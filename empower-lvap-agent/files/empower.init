@@ -119,14 +119,6 @@ append_ifname() {
 
 start() {
 
-    # one more hack, sometimes on APUs the eth0 is not ready when the network
-    # is booting, this seems to happen only with the OVS bridge. restart the
-    # network completelly
-    /etc/init.d/network restart
-
-    # give the network a little time to settle
-    sleep 10
-
     # load config parameters
     config_load empower
     config_get MASTER_IP general master_ip
